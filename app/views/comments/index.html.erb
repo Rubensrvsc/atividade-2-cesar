@@ -1,10 +1,3 @@
 
 <h1>Comentários</h1><%= link_to 'Criar Novo ',new_comment_path %>
-<% @comments.each do |comment| %>
-  <%= link_to(comment) do %>
-   <p> <%= comment.body %>  </p>
-  <% end %>
-
-  <p> Comentário aprovado : <%= comment.approved %> </p>
-  </p>
-<% end %>
+<%= render 'comment', comments: @comments %>
