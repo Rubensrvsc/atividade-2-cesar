@@ -1,2 +1,10 @@
-<h1>Comments#index</h1>
-<p>Find me in app/views/comments/index.html.erb</p>
+
+<h1>Comentários</h1><%= link_to 'Criar Novo ',new_comment_path %>
+<% @comments.each do |comment| %>
+  <%= link_to(comment) do %>
+   <p> <%= comment.body %>  </p>
+  <% end %>
+
+  <p> Comentário aprovado : <%= comment.approved %> </p>
+  </p>
+<% end %>
