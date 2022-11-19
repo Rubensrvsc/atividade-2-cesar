@@ -3,16 +3,17 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
 
   def index
-      @comments = Comment.order(id: :desc)
+    #adding filter for unapproved/ fake comments
+    @comments = Comment.where(approved: false)
   end
 
   def show
-      @comments = Comment.all
+    @comments = Comment.all
   end
 
 
   def new
-      @comment = Comment.new
+    @comment = Comment.new
   end
 
   def create
