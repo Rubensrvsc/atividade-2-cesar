@@ -1,4 +1,4 @@
-<div id="<%= dom_id movie %>">
+<div >
   <p>
     <strong>Title:</strong>
     <%= movie.title %>
@@ -9,6 +9,14 @@
     <%= movie.year %>
   </p>
 
+  <% if !@comments_approveds.nil? && @comments_approveds.count > 0 %>
+    <h1>Comentários</h1>
+    <% @comments_approveds.each do |comment| %>
+      <p>Comment: <%= comment.body %></p>
+    <% end %>
+  <% end %>
+
+  <% unless @actors.nil? %>
   <%= form_with(model: movie) do |form| %>
   <% if movie.errors.any? %>
     <div style="color: red">
@@ -24,13 +32,14 @@
   <div>
 
     <%= form.label "Actors" %><br />
-    <%= form.collection_check_boxes :actor_ids, [[1,'rubens']], :id, :name do |b| %>
+    <%= form.collection_check_boxes :actor_ids, @actors, :id, :name do |b| %>
       <div class="collection-check-box">
         <%= b.check_box %>
         <%= b.label %>
       </div>
     <% end %>
   </div>
+  <% end %>
 
   <div>
     <%= form.submit %>

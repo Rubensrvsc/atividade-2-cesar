@@ -3,6 +3,9 @@ class Comment < ApplicationRecord
   #validations 
   validates :body, presence: true, length: { minimum: 10 }
   validates :approved, inclusion: { in: [true, false] }
+  belongs_to :movie
+
+  scope :comments_approveds, -> (id) { where(movie_id: id, approved: true) }
 
 
   #methods

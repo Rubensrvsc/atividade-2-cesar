@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
+  before_action :selected_actors, only: %i[ edit ]
 
   # GET /movies or /movies.json
   def index
@@ -8,6 +9,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/1 or /movies/1.json
   def show
+    @comments_approveds = Comment.comments_approveds(params[:id])
   end
 
   # GET /movies/new
@@ -26,10 +28,8 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @movie.save
         format.html { redirect_to movie_url(@movie), notice: "Movie was successfully created." }
-        format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -39,10 +39,8 @@ class MoviesController < ApplicationController
     respond_to do |format|
       if @movie.update(movie_params)
         format.html { redirect_to movie_url(@movie), notice: "Movie was successfully updated." }
-        format.json { render :show, status: :ok, location: @movie }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,12 +51,16 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to movies_url, notice: "Movie was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def selected_actors
+      movie_id = Movie.find_by(id: params[:id])
+      @actors = Actor.includes(:actors_movies).where.not(:actors_movies => { movie_id: movie_id.id })
+    end
+    
     def set_movie
       @movie = Movie.find(params[:id])
     end

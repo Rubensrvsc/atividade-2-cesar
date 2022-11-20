@@ -2,5 +2,6 @@
   <% form.text_field :body %>
   <%= form.text_area :body, size: "50x10" %>
   <p><%= form.select :approved, [[true], [false]] %></p>
+  <%= form.select :movie_id, @movies.collect { |movie| [movie.title, movie.id] }  %>
   <p><%=  form.submit %></p>
 <% end %>
