@@ -1,0 +1,10 @@
+
+
+<p> <%= @comment.body %>  </p>
+<p> Comentário aprovado : <%= @comment.approved %> </p>
+
+<p> <%= link_to 'Editar',edit_comment_path%></p> 
+<p> <%= link_to 'Excluir', comment_path,data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
+<%= link_to 'Back', comments_path %>
+
+ 
