@@ -63,8 +63,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_134125) do
 
   add_foreign_key "actors_movies", "actors"
   add_foreign_key "actors_movies", "movies"
-  add_foreign_key "comments", "movies"
   add_foreign_key "logs", "comments"
   add_foreign_key "movie_actors", "actors"
   add_foreign_key "movie_actors", "movies"
+  add_foreign_key "comments", "movies"
 end
