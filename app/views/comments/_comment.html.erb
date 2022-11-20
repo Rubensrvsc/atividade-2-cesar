@@ -1,0 +1,8 @@
+<% comments.each do |comment| %>
+  <%= link_to(comment) do %>
+   <p> <%= comment.body %>  </p>
+  <% end %>
+
+  <p> Comentário aprovado : <%= comment.approved %> </p>
+  </p>
+<% end %>

@@ -1,0 +1,6 @@
+<%= form_with model: @comment do |form| %>
+  <% form.text_field :body %>
+  <%= form.text_area :body, size: "50x10" %>
+  <p><%= form.select :approved, [[true], [false]] %></p>
+  <p><%=  form.submit %></p>
+<% end %>
