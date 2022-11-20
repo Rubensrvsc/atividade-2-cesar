@@ -1,0 +1,17 @@
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#Comment_id</th>
+      <th scope="col">Date of Approved</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |log| %>     
+      <tr>
+        <td><%= log.comment_id%></td>
+        <td><%= log_date log.date_approved%></td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+</table>
