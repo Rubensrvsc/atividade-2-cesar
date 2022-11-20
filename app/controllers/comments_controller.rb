@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 
   before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :get_movies, only: %i[ new create edit ]
 
   def index
     #adding filter for unapproved/ fake comments
@@ -49,12 +50,16 @@ class CommentsController < ApplicationController
 
   private
 
+  def get_movies
+    @movies = Movie.selecte_movies_attributes
+  end
+
   def set_comment
     @comment = Comment.find(params[:id])
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :approved)
+    params.require(:comment).permit(:body, :approved, :movie_id)
   end
   
 end
