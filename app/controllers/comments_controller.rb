@@ -20,10 +20,11 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     if @comment.save
       redirect_to comments_path
-    elsif @comment.approved == true 
-      @comment.create_log
     else
       render :edit
+    end
+    if @comment.approved == true 
+      @comment.create_log
     end
   end
 
@@ -32,11 +33,12 @@ class CommentsController < ApplicationController
 
   def update 
     if @comment.update(comment_params)
-        redirect_to comments_path
-    elsif @comment.approved == true 
-      @comment.create_log
+      redirect_to comments_path
     else
-        render :edit
+      render :edit
+    end
+    if @comment.approved == true 
+      @comment.create_log
     end
   end
 

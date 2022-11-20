@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_194502) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_19_223743) do
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.boolean "approved", default: false
@@ -18,4 +18,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_194502) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "logs", force: :cascade do |t|
+    t.datetime "date_approved"
+    t.integer "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_logs_on_comment_id"
+  end
+
+  add_foreign_key "logs", "comments"
 end
