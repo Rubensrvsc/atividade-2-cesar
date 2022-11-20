@@ -15,10 +15,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_233639) do
     t.string "name"
     t.string "email"
     t.string "year"
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_223743) do
-  create_table "comments", force: :cascade do |t|
-    t.text "body"
-    t.boolean "approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,6 +28,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_223743) do
     t.index ["movie_id"], name: "index_actors_movies_on_movie_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.boolean "approved", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.datetime "date_approved"
+    t.integer "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_logs_on_comment_id"
+  end
+
+  create_table "movie_actors", force: :cascade do |t|
+    t.integer "movie_id", null: false
+    t.integer "actor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_movie_actors_on_actor_id"
+    t.index ["movie_id"], name: "index_movie_actors_on_movie_id"
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string "title"
     t.string "year"
@@ -41,15 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_223743) do
 
   add_foreign_key "actors_movies", "actors"
   add_foreign_key "actors_movies", "movies"
+  add_foreign_key "logs", "comments"
   add_foreign_key "movie_actors", "actors"
   add_foreign_key "movie_actors", "movies"
-  create_table "logs", force: :cascade do |t|
-    t.datetime "date_approved"
-    t.integer "comment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_logs_on_comment_id"
-  end
-
-  add_foreign_key "logs", "comments"
 end
