@@ -3,20 +3,23 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   context '#success' do
     before(:all) do
-      @movie = Movie.create(
+      @movie = Movie.new(
         title: 'Homem Formiga e vespa',
         year: 2019
       )
       @actor = Actor.create(
-        name: 'actor 1',
-        email: 'actor1@mail.com',
-        year: 1998
+        name: 'actor 2',
+        email: 'actor2@mail.com',
+        year: 1999
       )
       @movie.actors << Actor.first
+
+      @movie.save
+
       @comment_saved = Comment.new(
         body: 'Filme muito bom recomendo demais!',
         approved: false,
-        movie_id: Movie.first
+        movie_id: Movie.first.id
       )
           
     end
