@@ -16,7 +16,7 @@ RSpec.describe MoviesController, type: :controller do
         @movie = {
           movie: {
             title: 'Liga da Justiça 2',
-            year: '2003',
+            year: '2002',
             actor_ids: [@actor_id.id]
           }
         }
@@ -43,7 +43,7 @@ RSpec.describe MoviesController, type: :controller do
           year: '2003',
           actor_ids: [@actor.id]
         )
-        @movie = Movie.find_by(title: 'Liga da Justiça')
+        @movie = Movie.find_by(title: 'Liga da Justiça 3')
 
         Comment.create(
           body: 'Filme otimo',
