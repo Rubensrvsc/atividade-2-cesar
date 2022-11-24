@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
+  # test requests success case
   context '#success' do
     context '#create' do
       before(:all) do
@@ -31,7 +32,7 @@ RSpec.describe CommentsController, type: :controller do
         }
 
       end
-
+      # test create a comment
       it 'create comment' do
         post :create, params: @comment
         expect(subject.status).to eq(200)
@@ -39,36 +40,14 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
 
-    # context '#show_comments' do
-    #   before(:all) do
-    #     Actor.create(
-    #       name: 'actor 4',
-    #       email: 'actor4@mail.com',
-    #       year: 1998
-    #     )
-
-    #     @actor = Actor.find_by(name: 'actor 4')
-    #     Movie.create(
-    #       title: 'Liga da Justiça 3',
-    #       year: '2003',
-    #       actor_ids: [@actor.id]
-    #     )
-    #     @movie = Movie.find_by(title: 'Liga da Justiça')
-
-    #     Comment.create(
-    #       body: 'Filme otimo',
-    #       approved: true,
-    #       movie_id: @movie.id
-    #     )
-    #   end
-
-    #   it 'showing comments on movie' do
-    #     get :show, params: { id: @movie.id }
-    #     expect(subject.status).to eq(200)
-    #   end
-    # end
+    # test response successfuly
+    it 'responds successfully' do
+      get :index
+      expect(response).to be_successful
+    end
   end
 
+  # test requests failure case
   context '#failure' do
     before(:all) do
       Actor.create(
@@ -89,7 +68,7 @@ RSpec.describe CommentsController, type: :controller do
 
       @comment = {
         comment: {
-          body: 'Filme muito bom recomendo demais!',
+          # body: 'Filme muito bom recomendo demais!',
           approved: false,
           movie_ids: [@movie_id.id]
         }
