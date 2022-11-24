@@ -15,8 +15,8 @@ RSpec.describe MoviesController, type: :controller do
         @actor_id = Actor.find_by(name: 'actor 3')
         @movie = {
           movie: {
-            title: 'Liga da Justiça 2',
-            year: '2002',
+            title: 'Liga da Justiça 9',
+            year: '2009',
             actor_ids: [@actor_id.id]
           }
         }
